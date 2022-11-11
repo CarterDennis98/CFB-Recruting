@@ -9,6 +9,7 @@ const createServer = async () => {
 	await fastify.register(cors);
 
 	await fastify.register(require('./routes/recruit'), { prefix: 'recruit' });
+	await fastify.register(require('./routes/team'), { prefix: 'team' });
 
 	fastify.setErrorHandler((error, req, res) => {
 		req.log.error(error.toString());
