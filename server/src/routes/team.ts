@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
-import { createTeam, getAllTeams, getTeam } from '../controllers/team';
+import { createTeam, getTeam } from '../controllers/team';
 
 async function routes(fastify: FastifyInstance) {
 	fastify.get('/', async (
@@ -14,13 +14,16 @@ async function routes(fastify: FastifyInstance) {
 			year
 		} = req.query;
 
-
 		let result;
 
-		if (!team && !year) {
-			result = await getAllTeams();
-		} else if (team && year) {
+		if (team && year) {
 			result = await getTeam(team, year);
+		} else if (team && !year) {
+			result = await getTeam(team);
+		} else if (!team && year) {
+			result = await getTeam(undefined, year);
+		} else if (!team && !year) {
+			result = await getTeam();
 		}
 
 		res.status(200).send(result);
