@@ -19,7 +19,7 @@ export const getTeam = async (team?: string, year?: string) => {
 export const createTeam = async (data: any) => {
 	try {
 		// Clear collection of teams from matching year
-		await Team.deleteMany({ year: data[0].year });
+		await Team.deleteMany({ year: { $gte: data[0].year, $lte: data[data.length - 1].year } });
 		// Create teams
 		return await Team.create(data);
 	} catch (error) {
