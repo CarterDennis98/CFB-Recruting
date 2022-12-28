@@ -7,10 +7,14 @@ const options: mongoose.SchemaOptions = {
 export const recruitSchema = new mongoose.Schema(
 	{
 		name: { type: String },
-		age: { type: Number },
-		highSchool: { type: String },
-		city: { type: String },
-		state: { type: String }
+		school: { type: String },
+		position: { type: String },
+		heightWeight: { type: String },
+		stars: { type: Number },
+		rating: { type: Number },
+		nationalRank: mongoose.Schema.Types.Mixed,
+		stateRank: { type: Number },
+		positionRank: { type: Number },
 	},
 	options
 );
